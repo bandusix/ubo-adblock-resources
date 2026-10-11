@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SKETCH, NOT RUN: a daily job for the repository this directory is moved into.  Copy to .github/workflows/update-ubo-resources.yml and adapt
+# the paths (here: the repository root is this directory).  It converts the newest uBlock Origin *release* (betas such as 1.75.1b10 are skipped
+# because /releases/latest ignores pre-releases), prints what changed, checks the result with the real adblock-rust engine and opens a pull request
+# whose diff shows the scriptlet SOURCE (out/readable/), not base64.
+name: update-ubo-resources
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: tests of the converter itself (offline, fixture based)
+        run: npm test
+      - name: newest uBlock Origin release
+        id: ref
+        env: { GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
+        run: echo "tag=$(gh api repos/gorhill/uBlock/releases/latest --jq .tag_name)" >> "$GITHUB_OUTPUT"
+      - name: convert (incremental: the previous meta is the state)
+        env: { GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
+        run: |
+          node src/cli.mjs --ref "${{ steps.ref.outputs.tag }}" --out out --cache .upstream-cache \
+            --readable out/readable --state out/ubo-resources.meta.json | tee convert.log
+          if grep -q '^unchanged' convert.log; then echo "changed=false" >> "$GITHUB_ENV"; else echo "changed=true" >> "$GITHUB_ENV"; fi
+      - name: load the result into the real engine (0 rejected, every scriptlet and redirect resolves)
+        if: env.changed == 'true'
+        uses: dtolnay/rust-toolchain@stable
+      - if: env.changed == 'true'
+        run: cargo run --release --manifest-path verify-rs/Cargo.toml -- out/ubo-resources.json
+      - name: pull request with the diff summary as its body
+        if: env.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: update-ubo-resources
+          title: 'uBlock Origin ${{ steps.ref.outputs.tag }}'
+          body-path: convert.log
+          add-paths: out/

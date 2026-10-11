@@ -1,0 +1,60 @@
+# 人工合并 PR 之后才发布：把 dist/ 里已审核的文件作为 Release 资产发出，并附构建来源证明。
+# 发布的是未签名的数据；消费方（我们的流水线）在自己这边固定 sha256 并自行签名。
+name: release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "dist/**"
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+
+      - name: Re-verify the committed data
+        run: |
+          set -euo pipefail
+          (cd ubo && npm test)
+          cargo run --release --locked --manifest-path ubo/verify-rs/Cargo.toml -- dist/ubo-resources.json
+
+      - name: Package
+        id: pkg
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          cp dist/ubo-resources.json dist/ubo-resources.meta.json assets/
+          gzip -9 -n -c dist/ubo-resources.json > assets/ubo-resources.json.gz
+          (cd assets && shasum -a 256 ubo-resources.json ubo-resources.json.gz ubo-resources.meta.json > SHA256SUMS)
+          UP=$(node -e 'const m=require("./dist/ubo-resources.meta.json");console.log((m.upstream&&m.upstream.ref)||"unknown")')
+          case "$UP" in (*[!A-Za-z0-9._-]*|"") echo "bad upstream ref" >&2; exit 1;; esac
+          echo "name=ubo-$UP-r${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2.4.0
+        with:
+          subject-path: |
+            assets/ubo-resources.json
+            assets/ubo-resources.json.gz
+            assets/ubo-resources.meta.json
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NAME: ${{ steps.pkg.outputs.name }}
+        run: |
+          set -euo pipefail
+          gh release create "$NAME" assets/* --title "$NAME" --notes-file dist/DIFF.md --target "$GITHUB_SHA"

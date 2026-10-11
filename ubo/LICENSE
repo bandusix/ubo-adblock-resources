@@ -1,0 +1,22 @@
+SPDX-License-Identifier: GPL-3.0-or-later
+
+ubo-resources-converter  (this directory: src/, test/, verify-rs/, package.json, README.md)
+
+STATUS OF THIS FILE: a declaration, not the licence text, and provisional.  The final licence of the converter is for the maintainers of the
+repository this directory lives in to decide; until they do, everything here is declared GPL-3.0-or-later.
+
+Why GPL-3.0-or-later and not something else:
+
+  * The converter's OUTPUT (ubo-resources.json) consists of code taken from uBlock Origin (https://github.com/gorhill/uBlock), whose source files
+    carry "GNU General Public License ... either version 3 of the License, or (at your option) any later version" headers.  The output is
+    therefore GPL-3.0-or-later data, whatever licence the converter itself has.  Two redirect resources are derived from third-party code that
+    uBlock Origin ships (google-ima-dai.js: AdGuard Scriptlets, GPLv3 per its header; google-ima.js: "based on Mozilla source code", no licence
+    stated in the file); see "Licence facts" in README.md and `files[].license_notice` in ubo-resources.meta.json.
+  * The converter does not contain uBlock Origin code.  Its test fixtures (test/fixtures/upstream/) are small files written for this repository
+    that only imitate the SHAPE of upstream files; they are not copies.
+
+What this directory does NOT license: Brave's adblock-rust (MPL-2.0; used only by verify-rs/ as a dependency, not vendored), and uBlock Origin's own
+files (GPL-3.0-or-later; downloaded at run time into a cache, never committed here).
+
+The full text of the GNU General Public License, version 3, is at https://www.gnu.org/licenses/gpl-3.0.txt and, for the pinned uBlock Origin
+commit, at the `license_url` recorded in ubo-resources.meta.json.  Add it to the repository root as COPYING / LICENSE.txt before publishing.

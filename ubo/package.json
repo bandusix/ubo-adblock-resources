@@ -1,0 +1,16 @@
+{
+  "name": "ubo-resources-converter",
+  "version": "1.0.0",
+  "description": "Converts uBlock Origin's scriptlets and redirect resources into Brave adblock-rust Resource JSON (no dependencies, no code execution)",
+  "private": true,
+  "type": "module",
+  "license": "GPL-3.0-or-later",
+  "engines": { "node": ">=20" },
+  "bin": { "ubo-resources": "src/cli.mjs" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "mutate": "node test/mutants.mjs",
+    "build": "node src/cli.mjs --ref 1.75.0 --out out --cache .upstream-cache --readable out/readable --state out/ubo-resources.meta.json",
+    "build:offline": "node src/cli.mjs --offline .upstream-cache --out out --readable out/readable --state out/ubo-resources.meta.json"
+  }
+}

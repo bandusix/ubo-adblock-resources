@@ -1,0 +1,4 @@
+                    GNU GENERAL PUBLIC LICENSE
+                       Version 3, 29 June 2007
+
+ (fixture stand-in for the upstream licence text; the converter only checks the heading)

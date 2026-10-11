@@ -1,0 +1,100 @@
+# 每天检查 uBlock Origin 的最新发布 tag；有新版本才转换，通过测试后开一个 PR 供人工审核（不会直接发布）。
+# 本仓库不持有任何签名密钥或第三方凭据；Action 版本按提交哈希钉死（2026-10-11 用 GitHub API 解析）。
+name: update-from-upstream
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "uBlock Origin 发布 tag（留空 = 最新发布）"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: update-from-upstream
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: true
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+
+      - name: Resolve upstream tag
+        id: up
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_REF: ${{ inputs.ref }}
+        run: |
+          set -euo pipefail
+          TAG="${INPUT_REF:-}"
+          if [ -z "$TAG" ]; then TAG=$(gh api repos/gorhill/uBlock/releases/latest --jq .tag_name); fi
+          case "$TAG" in (*[!A-Za-z0-9._-]*|"") echo "bad tag: $TAG" >&2; exit 1;; esac
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "upstream tag: $TAG"
+
+      - name: Skip if a PR for this tag already exists
+        id: dup
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.up.outputs.tag }}
+        run: |
+          set -euo pipefail
+          n=$(gh pr list --state open --head "auto/ubo-$TAG" --json number --jq length)
+          echo "open=$n" >> "$GITHUB_OUTPUT"
+
+      - name: Convert (incremental)
+        id: conv
+        if: steps.dup.outputs.open == '0'
+        env:
+          TAG: ${{ steps.up.outputs.tag }}
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          STATE=()
+          if [ -f dist/ubo-resources.meta.json ]; then STATE=(--state dist/ubo-resources.meta.json); fi
+          node ubo/src/cli.mjs --ref "$TAG" "${STATE[@]}" --out out --readable out/readable | tee out/convert.log
+          if [ -f out/ubo-resources.json ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; else echo "changed=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Tests and engine acceptance
+        if: steps.conv.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+          (cd ubo && npm test)
+          cargo run --release --locked --manifest-path ubo/verify-rs/Cargo.toml -- out/ubo-resources.json | tee out/verify.log
+
+      - name: Open a pull request for human review
+        if: steps.conv.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.up.outputs.tag }}
+        run: |
+          set -euo pipefail
+          { echo "# Upstream uBlock Origin $TAG"; echo; echo '```'; cat out/convert.log; echo; cat out/verify.log; echo '```'; } > out/DIFF.md
+          rm -rf dist && mkdir -p dist
+          cp out/ubo-resources.json out/ubo-resources.meta.json dist/
+          cp -r out/readable dist/readable
+          cp out/DIFF.md dist/DIFF.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "auto/ubo-$TAG"
+          git add dist
+          git commit -m "Update resources from uBlock Origin $TAG"
+          git push origin "auto/ubo-$TAG"
+          head -c 60000 out/DIFF.md > out/pr-body.md
+          gh pr create --base main --head "auto/ubo-$TAG" --title "uBlock Origin $TAG" --body-file out/pr-body.md

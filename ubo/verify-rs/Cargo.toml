@@ -1,0 +1,17 @@
+[package]
+name = "ubo-verify"
+version = "1.0.0"
+edition = "2021"
+publish = false
+description = "Loads ubo-resources.json into the real Brave adblock-rust engine and checks that nothing is rejected and that every scriptlet / redirect resolves"
+license = "GPL-3.0-or-later"
+
+[dependencies]
+# Same engine version and the features the shipped native module uses (it swaps the embedded public-suffix resolver for its own; a
+# standalone checker just uses the embedded one); pinned exactly.
+adblock = { version = "=0.13.3", default-features = false, features = ["full-regex-handling", "css-validation", "embedded-domain-resolver"] }
+serde_json = "1"
+base64 = "0.22"
+
+[profile.release]
+opt-level = 2
