@@ -66,10 +66,10 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p out
-          STATE=()
-          if [ -f dist/ubo-resources.meta.json ]; then STATE=(--state dist/ubo-resources.meta.json); fi
-          node ubo/src/cli.mjs --ref "$TAG" "${STATE[@]}" --out out --readable out/readable | tee out/convert.log
-          if [ -f out/ubo-resources.json ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; else echo "changed=false" >> "$GITHUB_OUTPUT"; fi
+          # the converter compares against the previous output found in --out: put the reviewed dist/ there first
+          if [ -f dist/ubo-resources.meta.json ]; then cp dist/ubo-resources.json dist/ubo-resources.meta.json out/; fi
+          node ubo/src/cli.mjs --ref "$TAG" --state out/ubo-resources.meta.json --out out --readable out/readable | tee out/convert.log
+          if grep -q '^unchanged' out/convert.log; then echo "changed=false" >> "$GITHUB_OUTPUT"; else echo "changed=true" >> "$GITHUB_OUTPUT"; fi
 
       - name: Tests and engine acceptance
         if: steps.conv.outputs.changed == 'true'
