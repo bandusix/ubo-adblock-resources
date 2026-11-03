@@ -40,7 +40,7 @@ scriptlets/evaldata-prune.js	evaldata-prune.js	template		object-prune.fn proxy-a
 redirects/fingerprint2.js	fingerprint2.js	application/javascript			0	01064caf391f3658189705f35474fa6bcbc99ff8b03abf7f88ec811656a9c25d	942
 redirects/fingerprint3.js	fingerprint3.js	application/javascript			0	c1a65a8ed8c00f6d97fb4e0dab082195c8667de5b7576aa6208af68edd9e9f1d	605
 scriptlets/freeze-element-property.js	freeze-element-property.js	template		safe-self.fn	0	e2dc1c37b25dda4145a8905810e04b2cfcb49b25ca411c2239aed7830ee9ed32	1828
-helpers/generate-content.fn.js	generate-content.fn	fn/javascript		safe-self.fn scriptlet-globals.fn	0	37edc1f68f359575e900d131ee778f0fd88630df5c69c34fc2124931c1b02474	2275
+helpers/generate-content.fn.js	generate-content.fn	fn/javascript		safe-self.fn scriptlet-globals.fn	0	2b32871e5e338cc5635cd669ad5b1699d5431bd8fb8bc3bf7435af9f2b18c512	2315
 helpers/get-all-cookies.fn.js	get-all-cookies.fn	fn/javascript		safe-self.fn	0	9635b6b45e58167d983014a39bcab957ed78588528198db40fcf7aafe98c5317	415
 helpers/get-all-local-storage.fn.js	get-all-local-storage.fn	fn/javascript			0	f72b3bb66c695bcd50f16250bd6e209eddfa6d16db4fff2b6d5134789725b55c	292
 helpers/get-cookie.fn.js	get-cookie.fn	fn/javascript		safe-self.fn	0	53763045763b648cc58da5fb7f7fd6079fef5f22332be022da91462893e0d2a1	320
@@ -142,7 +142,7 @@ helpers/replace-fetch-response.fn.js	replace-fetch-response.fn	fn/javascript		co
 helpers/replace-node-text.fn.js	replace-node-text.fn	fn/javascript		get-random-token.fn run-at.fn safe-self.fn	0	92a2a26ea90f05fa770da69f559ba70573d52fbbc79a99401b84accd9b05a020	4362
 helpers/run-at-html-element.fn.js	run-at-html-element.fn	fn/javascript			0	a55e3d3db1ff1a7ba7ee1a87ee68ac6d2454799f93b9375a15467b509f779821	266
 helpers/run-at.fn.js	run-at.fn	fn/javascript		safe-self.fn	0	7893c3a3eb3e2a96c1b7a52eab8aea7c20b9200e994248519e40cd54bbeb7468	991
-helpers/safe-self.fn.js	safe-self.fn	fn/javascript		scriptlet-globals.fn	0	b3d45c1a192fb1147cfefe87e1b36f5844944a8afe355fb5e56d29290711c7bf	6799
+helpers/safe-self.fn.js	safe-self.fn	fn/javascript		scriptlet-globals.fn	0	48bdf5e3ad0ba275758c8156aa6b687113e008e068929d10416789a168d6cd69	6993
 redirects/scorecardresearch_beacon.js	scorecardresearch_beacon.js	application/javascript	scorecardresearch.com/beacon.js		0	a8da437e94209c2527907d0049c183220f33e7a464abfdde27edd5ea315da96e	182
 helpers/scriptlet-globals.fn.js	scriptlet-globals.fn	fn/javascript			0	b54c5050523b5a49a2876fe665acf38396988aadd2d9267656d8fc65a1c909c4	88
 redirects/sensors-analytics.js	sensors-analytics.js	application/javascript			0	9defb35462d31853b04c90098946eaf20048ed609e32b970c0d1313f478fc6fe	219
