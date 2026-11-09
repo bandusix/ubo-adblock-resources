@@ -15,6 +15,9 @@ function jsonlEditXhrResponseFn(trusted, jsonq = '', ...varargs) {
     }
     const extraArgs = safe.parseVarargs(varargs);
     const propNeedles = parsePropertiesToMatchFn(extraArgs.propsToMatch, 'url');
+    const jsonExtract = extraArgs.jsonExtract
+        ? new RegExp(extraArgs.jsonExtract)
+        : /^(.*)$/;
     self.XMLHttpRequest = class extends self.XMLHttpRequest {
         open(method, url, ...args) {
             const xhrDetails = { method, url };
@@ -47,7 +50,7 @@ function jsonlEditXhrResponseFn(trusted, jsonq = '', ...varargs) {
             if ( typeof innerResponse !== 'string' ) {
                 return (xhrDetails.response = innerResponse);
             }
-            const outerResponse = jsonlEditFn(jsonp, innerResponse);
+            const outerResponse = jsonlEditFn(jsonp, innerResponse, jsonExtract);
             if ( outerResponse !== innerResponse ) {
                 safe.uboLog(logPrefix, 'Pruned');
             }
