@@ -25,7 +25,8 @@ scriptlets/disable-newtab-links.js	disable-newtab-links.js	template			0	86dcd328
 redirects/doubleclick_instream_ad_status.js	doubleclick_instream_ad_status.js	application/javascript	doubleclick.net/instream/ad_status.js		0	eed0dc1fdb5d97ed188ae16fd5e1024a5bb744af47340346be2146300a6c54b9	29
 helpers/edit-element-object.fn.js	edit-element-object.fn	fn/javascript		jsonpath.fn lookup-elements.fn safe-self.fn sleep.fn	0	849c63a7cc641ddd324188047aa0f42f36014d8379c8f48ee32c8b90087b62b8	1112
 scriptlets/edit-element-object.js	edit-element-object.js	template		edit-element-object.fn	0	4fee0184f862a12918a2f4a15015b0657b043a7329318a5089e1030d5e120cb6	80
-helpers/edit-inbound-object.fn.js	edit-inbound-object.fn	fn/javascript		jsonpath.fn proxy-apply.fn safe-self.fn	0	78de8e94693537b7da8ca8c51c22499f5857a8eb82ce9af74679e205a5708301	1745
+helpers/edit-inbound-element.fn.js	edit-inbound-element.fn	fn/javascript		jsonpath.fn proxy-apply.fn safe-self.fn	0	6c8729909e4f6b6c634deb498b50ceecaf26f436bde114aa3516cfb6ac8709fb	1602
+helpers/edit-inbound-object.fn.js	edit-inbound-object.fn	fn/javascript		jsonpath.fn proxy-apply.fn safe-self.fn	0	eb0d7117bf6080b8860f9c9c08c043707701894c98461a6ecc9a9e4914cc876c	1866
 scriptlets/edit-inbound-object.js	edit-inbound-object.js	template		edit-inbound-object.fn	0	c91abac7075d8cd3b12e343dddf084916dcf98024a514cbf095f069f4968ab31	129
 helpers/edit-object-on-getter.fn.js	edit-object-on-getter.fn	fn/javascript		jsonpath.fn safe-self.fn trap-property-access.fn	0	7f8ebfe356793a097ff9416d38b6cc1448a7ff7b1e236c01d1b4593a08942cf0	1118
 scriptlets/edit-object-on-getter.js	edit-object-on-getter.js	template		edit-object-on-getter.fn	0	f7cf1bdcc08b837914bf6da20ee2ae4161f46e978b66fbee539ec2ceb48b3e3d	82
@@ -39,8 +40,9 @@ redirects/empty	empty	text/plain			0	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649
 scriptlets/evaldata-prune.js	evaldata-prune.js	template		object-prune.fn proxy-apply.fn	0	4949366c4ab32967f9eb4208c08b901629dbc76c7965c9abdbde411bea4ebaf1	389
 redirects/fingerprint2.js	fingerprint2.js	application/javascript			0	01064caf391f3658189705f35474fa6bcbc99ff8b03abf7f88ec811656a9c25d	942
 redirects/fingerprint3.js	fingerprint3.js	application/javascript			0	c1a65a8ed8c00f6d97fb4e0dab082195c8667de5b7576aa6208af68edd9e9f1d	605
+redirects/freestar_pubfig.js	freestar_pubfig.js	application/javascript			0	205fad364684d59722452d949451e95a3409fe35a494f00558add2525b690f7d	142
 scriptlets/freeze-element-property.js	freeze-element-property.js	template		safe-self.fn	0	e2dc1c37b25dda4145a8905810e04b2cfcb49b25ca411c2239aed7830ee9ed32	1828
-helpers/generate-content.fn.js	generate-content.fn	fn/javascript		safe-self.fn scriptlet-globals.fn	0	37edc1f68f359575e900d131ee778f0fd88630df5c69c34fc2124931c1b02474	2275
+helpers/generate-content.fn.js	generate-content.fn	fn/javascript		safe-self.fn	0	7f4a7cdb1bf1650ef227573d89db3dff8bb2b3898dc4bcc177c180c2f8e252eb	1609
 helpers/get-all-cookies.fn.js	get-all-cookies.fn	fn/javascript		safe-self.fn	0	9635b6b45e58167d983014a39bcab957ed78588528198db40fcf7aafe98c5317	415
 helpers/get-all-local-storage.fn.js	get-all-local-storage.fn	fn/javascript			0	f72b3bb66c695bcd50f16250bd6e209eddfa6d16db4fff2b6d5134789725b55c	292
 helpers/get-cookie.fn.js	get-cookie.fn	fn/javascript		safe-self.fn	0	53763045763b648cc58da5fb7f7fd6079fef5f22332be022da91462893e0d2a1	320
@@ -53,8 +55,8 @@ redirects/google-analytics_ga.js	google-analytics_ga.js	application/javascript	g
 redirects/google-analytics_inpage_linkid.js	google-analytics_inpage_linkid.js	application/javascript	google-analytics.com/inpage_linkid.js		0	c0ae3b497d74e3938a565dc01b771ceaebee5547aa16f49ed7ab53ccefbd66d4	117
 redirects/google-ima-dai.js	google-ima-dai.js	application/javascript	google-ima3-dai		1	e5e0bd1cac1fca4663d020e274d6e73104c56a0493670657d9a627571285159a	32594
 redirects/google-ima.js	google-ima.js	application/javascript	google-ima3		0	4bf8e398a46c982cd72ec1723e03f58784624da2f41caeeefb78e1fad1d47535	14911
-redirects/googlesyndication_adsbygoogle.js	googlesyndication_adsbygoogle.js	application/javascript	googlesyndication-adsbygoogle googlesyndication.com/adsbygoogle.js		0	5070b9913083ba79d8abb303623707cfd50e99a033d253945c2456257b68aaf0	3327
-redirects/googletagservices_gpt.js	googletagservices_gpt.js	application/javascript	googletagservices-gpt googletagservices.com/gpt.js		0	ea04360254cb68336355ff4dcfa81cbf9b2989599c0b73d48a12fe017d57f960	4247
+redirects/googlesyndication_adsbygoogle.js	googlesyndication_adsbygoogle.js	application/javascript	googlesyndication-adsbygoogle googlesyndication.com/adsbygoogle.js		0	a6ebe6aa9727b701336d11d5cfe4abb440ce1ec53a08eca0add260fe8fe73bfb	3330
+redirects/googletagservices_gpt.js	googletagservices_gpt.js	application/javascript	googletagservices-gpt googletagservices.com/gpt.js		0	48032744611a9bb72775f167083586115af297fc742421df7d98a9e837d78b43	4275
 redirects/hd-main.js	hd-main.js	application/javascript			0	fddf8facf6160a408c81222342b18a4ff3080a672396ecd8c41483b8c9889ab2	1250
 scriptlets/href-sanitizer.js	href-sanitizer.js	template	urlskip.js	on-idle.fn run-at.fn safe-self.fn urlskip.fn	0	7f130f8e3b1f312647f9806d04e44c919adfa2dce6d0d8621eaa23da021509d7	3399
 helpers/json-edit-fetch-request.fn.js	json-edit-fetch-request.fn	fn/javascript		collate-fetch-arguments.fn jsonpath.fn match-object-properties.fn parse-properties-to-match.fn proxy-apply.fn safe-self.fn	0	73a12ac5662092c001e61a51cf3c7aca132794478fe916616e2298355b112a01	2047
@@ -65,17 +67,17 @@ helpers/json-edit-xhr-request.fn.js	json-edit-xhr-request.fn	fn/javascript		json
 scriptlets/json-edit-xhr-request.js	json-edit-xhr-request.js	template		json-edit-xhr-request.fn	0	3c63c50d0aa783025ecc7baae19288ea9fed8f54204bc884976c7d20835e8c99	101
 helpers/json-edit-xhr-response.fn.js	json-edit-xhr-response.fn	fn/javascript		jsonpath.fn match-object-properties.fn parse-properties-to-match.fn safe-self.fn	0	80988dbc72164346788ce3302d3c70151366e0109d762ee03f98e931643cb5a0	2885
 scriptlets/json-edit-xhr-response.js	json-edit-xhr-response.js	template		json-edit-xhr-response.fn	0	861733af03b853542590ee944977144a6ec0704a100147114dae1462128ac335	103
-helpers/json-edit.fn.js	json-edit.fn	fn/javascript		jsonpath.fn proxy-apply.fn safe-self.fn	0	699703732d70eddc0f3f1ecfe7a4f89d636d54d0dc1e26d42e54a552a64c75e8	1073
+helpers/json-edit.fn.js	json-edit.fn	fn/javascript		jsonpath.fn proxy-apply.fn safe-self.fn	0	f02903abb0d9889d38ffadd53c9d280db45af93c92e42cba29f27c62d7085a81	1129
 scriptlets/json-edit.js	json-edit.js	template		json-edit.fn	0	7221a9baf5814af94e7d4f2d9c8a66724e014754fe1de983421cb6fbb037eb8e	87
 scriptlets/json-prune-fetch-response.js	json-prune-fetch-response.js	template		collate-fetch-arguments.fn match-object-properties.fn object-prune.fn parse-properties-to-match.fn safe-self.fn	0	6d3a8ec336426d599aab28369a25a91911570edee5ddd158df6953fd43bf16b5	2758
 scriptlets/json-prune-xhr-response.js	json-prune-xhr-response.js	template		match-object-properties.fn object-prune.fn parse-properties-to-match.fn safe-self.fn	0	6d6bf30e427e321a6a975a6e87c4a2869d8bc76ec4b062e59b126af0d9128a53	3190
 scriptlets/json-prune.js	json-prune.js	template		object-prune.fn proxy-apply.fn safe-self.fn	0	f0e79e5f154ca2182587f11cb6b5aea4eea86542604e37517d938d7ab30af6af	1054
-helpers/jsonl-edit-fetch-response.fn.js	jsonl-edit-fetch-response.fn	fn/javascript		collate-fetch-arguments.fn jsonl-edit.fn jsonpath.fn match-object-properties.fn parse-properties-to-match.fn proxy-apply.fn safe-self.fn	0	dc588587c596e56850cc0b58af0a90a814efa9d3b104b24a0bc25216fa6a7c0c	2574
+helpers/jsonl-edit-fetch-response.fn.js	jsonl-edit-fetch-response.fn	fn/javascript		collate-fetch-arguments.fn jsonl-edit.fn jsonpath.fn match-object-properties.fn parse-properties-to-match.fn proxy-apply.fn safe-self.fn	0	d933d9cfa52a222b9f0a9e97e647e1ba38f478da53e7dd8b3a8ec6722502be24	2697
 scriptlets/jsonl-edit-fetch-response.js	jsonl-edit-fetch-response.js	template		jsonl-edit-fetch-response.fn	0	22223b1056bfb0cd6a970dbb4ed49bca1ead05bdad51b9dece433af32f816607	109
-helpers/jsonl-edit-xhr-response.fn.js	jsonl-edit-xhr-response.fn	fn/javascript		jsonl-edit.fn jsonpath.fn match-object-properties.fn parse-properties-to-match.fn safe-self.fn	0	6e1aaf739603fa5bbffb1c90be121a665be0bcf32bc5d4fb35fa0c7c73691ff1	2460
+helpers/jsonl-edit-xhr-response.fn.js	jsonl-edit-xhr-response.fn	fn/javascript		jsonl-edit.fn jsonpath.fn match-object-properties.fn parse-properties-to-match.fn safe-self.fn	0	70f2e192a9ff035913fec927ee3a1ef4ff47585257ef5a06201573c7965b21d5	2583
 scriptlets/jsonl-edit-xhr-response.js	jsonl-edit-xhr-response.js	template		jsonl-edit-xhr-response.fn	0	acc3073243883dfed3dcd6a46b06dca8b895f40c841578ed07f9a9d5b454bd09	105
-helpers/jsonl-edit.fn.js	jsonl-edit.fn	fn/javascript		jsonpath.fn safe-self.fn	0	6f5dd5ad250e4eb2fd405a3b6c29822a3c8da3b88366e56855fd482ed7b00cf0	751
-helpers/jsonpath.fn.js	jsonpath.fn	fn/javascript			0	8f44b8d121efa8654e611f2ec586b4e6f9af2da15897adae57cf167631a90ab3	20145
+helpers/jsonl-edit.fn.js	jsonl-edit.fn	fn/javascript		jsonpath.fn safe-self.fn	0	353171bf39da124369c48371d6a6c25a6c6f00342cc4326bc50867e80677e33c	1138
+helpers/jsonpath.fn.js	jsonpath.fn	fn/javascript			0	8258bb0725fe30efa8909cb40d4cce95709a735755edd2bf90927465d24bc18d	20396
 helpers/lookup-elements.fn.js	lookup-elements.fn	fn/javascript		off-idle.fn on-idle.fn	0	687a0b9bc104a92ef92a34771b7f5cf41de12a668d955358b30bb6750be1cec4	3804
 scriptlets/m3u-prune.js	m3u-prune.js	template		proxy-apply.fn safe-self.fn	0	1c1fbfbfe971517d0898996f75128a727df1a7de1ee3d56e649ea86db18c8861	6547
 helpers/match-object-properties.fn.js	match-object-properties.fn	fn/javascript		safe-self.fn	0	c781607ee4ae0ececa0a39ba84886624e22157aa05b851a7944352fc76d580bf	716
@@ -117,7 +119,7 @@ redirects/prebid-ads.js	prebid-ads.js	application/javascript			0	e9e1f5743fd0210
 scriptlets/prevent-addEventListener.js	prevent-addEventListener.js	template	addEventListener-defuser.js aeld.js	proxy-apply.fn run-at.fn safe-self.fn	0	d2c02308ccaac66ffb8e08084f592422288f107aa9548ab8bca38df3c231405f	4092
 scriptlets/prevent-bab.js	prevent-bab.js	template	bab-defuser.js nobab.js	proxy-apply.fn safe-self.fn	0	03af8b372cb531e1d4c9dd336ba4c29694d8997c824c65781df99b9f1bde5508	1974
 scriptlets/prevent-canvas.js	prevent-canvas.js	template		safe-self.fn	0	6f14f9f42d8b457d4f1a480cf0d6bdc358470d3c0041f5f6e77e741bbc9bd9bb	447
-scriptlets/prevent-clipboard-write.js	prevent-clipboard-write.js	template		proxy-apply.fn run-at.fn safe-self.fn	1	c5793484df50615c1a3e5e6898484d51b5e08834da6146dd476f26a361b9a801	3796
+scriptlets/prevent-clipboard-write.js	prevent-clipboard-write.js	template		proxy-apply.fn run-at.fn safe-self.fn	1	dd98402f78c48e0207fc1f16c367443cb602df39ed44d18f3c9110e5086711a5	3975
 scriptlets/prevent-dialog.js	prevent-dialog.js	template		safe-self.fn	0	ab33ac9f8f80dea719610ecaf98557885a6a4cce3a9c5d976b04fcbd00ada1c1	819
 helpers/prevent-fetch.fn.js	prevent-fetch.fn	fn/javascript		collate-fetch-arguments.fn generate-content.fn match-object-properties.fn parse-properties-to-match.fn proxy-apply.fn safe-self.fn	0	a096c96105550645408702b4a24a9e78a33b38e4b35d0468522fd98d16edb69f	3099
 scriptlets/prevent-fetch.js	prevent-fetch.js	template	no-fetch-if.js	prevent-fetch.fn	0	5558c65e5ea1634865a0b1be55e465d008eec804e11b12e10e359873e8eacacb	70
@@ -142,7 +144,7 @@ helpers/replace-fetch-response.fn.js	replace-fetch-response.fn	fn/javascript		co
 helpers/replace-node-text.fn.js	replace-node-text.fn	fn/javascript		get-random-token.fn run-at.fn safe-self.fn	0	92a2a26ea90f05fa770da69f559ba70573d52fbbc79a99401b84accd9b05a020	4362
 helpers/run-at-html-element.fn.js	run-at-html-element.fn	fn/javascript			0	a55e3d3db1ff1a7ba7ee1a87ee68ac6d2454799f93b9375a15467b509f779821	266
 helpers/run-at.fn.js	run-at.fn	fn/javascript		safe-self.fn	0	7893c3a3eb3e2a96c1b7a52eab8aea7c20b9200e994248519e40cd54bbeb7468	991
-helpers/safe-self.fn.js	safe-self.fn	fn/javascript		scriptlet-globals.fn	0	b3d45c1a192fb1147cfefe87e1b36f5844944a8afe355fb5e56d29290711c7bf	6799
+helpers/safe-self.fn.js	safe-self.fn	fn/javascript		scriptlet-globals.fn	0	77d4acbf2d3d14434cfaf336869b34d941499bbfcc74204791433f8a6b9b8f0b	7155
 redirects/scorecardresearch_beacon.js	scorecardresearch_beacon.js	application/javascript	scorecardresearch.com/beacon.js		0	a8da437e94209c2527907d0049c183220f33e7a464abfdde27edd5ea315da96e	182
 helpers/scriptlet-globals.fn.js	scriptlet-globals.fn	fn/javascript			0	b54c5050523b5a49a2876fe665acf38396988aadd2d9267656d8fc65a1c909c4	88
 redirects/sensors-analytics.js	sensors-analytics.js	application/javascript			0	9defb35462d31853b04c90098946eaf20048ed609e32b970c0d1313f478fc6fe	219
@@ -162,6 +164,7 @@ helpers/trap-property-access.fn.js	trap-property-access.fn	fn/javascript		safe-s
 scriptlets/trusted-click-element.js	trusted-click-element.js	template		get-all-cookies.fn get-all-local-storage.fn lookup-elements.fn run-at-html-element.fn safe-self.fn	1	06da7e409a7ca9204023f012c3f58be576f358a03e51fb3d216d076b66755e84	4248
 scriptlets/trusted-create-html.js	trusted-create-html.js	template		run-at.fn safe-self.fn	1	4428e40a6e6ca3f17030a072ac368e6c4e68071ebb118e560b557ff2c6fe1a48	3118
 scriptlets/trusted-edit-element-object.js	trusted-edit-element-object.js	template		edit-element-object.fn	1	a1adf92ddb8aa7c0dca41b72eaa5fbfa4fa499845a3dc2931dea80bd0fbb802f	86
+scriptlets/trusted-edit-inbound-element.js	trusted-edit-inbound-element.js	template		edit-inbound-element.fn	1	80ae6c6d85516e3569964352875ab063eed88aeb02efccb7fb7c12f4f6c674c4	88
 scriptlets/trusted-edit-inbound-object.js	trusted-edit-inbound-object.js	template		edit-inbound-object.fn	1	cf3584cdd72934193356de19afaeea2e9e7b7e84510e034623c6a4c52771c019	135
 scriptlets/trusted-edit-object-on-getter.js	trusted-edit-object-on-getter.js	template		edit-object-on-getter.fn	1	168b334358a02f290ea08c0a1fd7a2df264c4cd6a1953e61f6b763a05ffff2a6	88
 scriptlets/trusted-edit-object-on-setter.js	trusted-edit-object-on-setter.js	template		edit-object-on-setter.fn	1	8520d47b726f946b7721a2886eaca13fdf7e671a1e718f6864fb679e5e08aa21	88
@@ -175,7 +178,7 @@ scriptlets/trusted-json-edit.js	trusted-json-edit.js	template		json-edit.fn	1	03
 scriptlets/trusted-jsonl-edit-fetch-response.js	trusted-jsonl-edit-fetch-response.js	template		jsonl-edit-fetch-response.fn	1	dfa13bc6f0cadb327b00159be7539237167859539ea7999b7f46cdc43d937c7a	115
 scriptlets/trusted-jsonl-edit-xhr-response.js	trusted-jsonl-edit-xhr-response.js	template		jsonl-edit-xhr-response.fn	1	d8eb8bb9d7e8b281f4e9c7d61f8c16ff1cce29c019e9ad090cba567640502237	111
 scriptlets/trusted-override-element-method.js	trusted-override-element-method.js	template		proxy-apply.fn safe-self.fn validate-constant.fn	1	ee82a5d43c8712be3d7e5e8fc8fda2e0d941c5b92c0ddb17edbb954df6c334fb	1120
-scriptlets/trusted-prevent-dom-bypass.js	trusted-prevent-dom-bypass.js	template		proxy-apply.fn safe-self.fn	1	3bebcbd1342a92c6fe68dc0531fc7b588b2430ffb3fdc8adee921ee332042720	1615
+scriptlets/trusted-prevent-dom-bypass.js	trusted-prevent-dom-bypass.js	template		proxy-apply.fn safe-self.fn	1	cd96e1a4d440cde9714027e8af921a83315014575ffe5f74ffca9f10b3ca60ab	1735
 scriptlets/trusted-prevent-fetch.js	trusted-prevent-fetch.js	template		prevent-fetch.fn	1	c716cbdc69277215011c016262fd5fcb969d281c1bc1ecce35ec1a612450606f	76
 scriptlets/trusted-prevent-xhr.js	trusted-prevent-xhr.js	template		prevent-xhr.fn	0	57dffb5e9bdd446f38a0271e722e363ff1eda17b4dbe2e07dbbb37578de15883	72
 scriptlets/trusted-prune-inbound-object.js	trusted-prune-inbound-object.js	template		object-find-owner.fn object-prune.fn safe-self.fn	1	47bd5993cdf24d2358118fd68c2e8c2608b94a1bf76028cec2d08fce385c6c3a	2406
