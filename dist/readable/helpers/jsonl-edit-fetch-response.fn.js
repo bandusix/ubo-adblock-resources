@@ -14,6 +14,9 @@ function jsonlEditFetchResponseFn(trusted, jsonq = '', ...varargs) {
     }
     const extraArgs = safe.parseVarargs(varargs);
     const propNeedles = parsePropertiesToMatchFn(extraArgs.propsToMatch, 'url');
+    const jsonExtract = extraArgs.jsonExtract
+        ? new RegExp(extraArgs.jsonExtract)
+        : /^(.*)$/;
     const logall = jsonq === '';
     proxyApplyFn('fetch', function(context) {
         const args = context.callArgs;
@@ -34,7 +37,7 @@ function jsonlEditFetchResponseFn(trusted, jsonq = '', ...varargs) {
                     safe.uboLog(logPrefix, textBefore);
                     return responseBefore;
                 }
-                const textAfter = jsonlEditFn(jsonp, textBefore);
+                const textAfter = jsonlEditFn(jsonp, textBefore, jsonExtract);
                 if ( textAfter === textBefore ) { return responseBefore; }
                 safe.uboLog(logPrefix, 'Pruned');
                 const responseAfter = new Response(textAfter, {
